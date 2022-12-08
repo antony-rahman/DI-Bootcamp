@@ -1,0 +1,42 @@
+.boxes{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.3em;
+    gap: 3vh;
+    
+}
+
+.box1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    height: 12vh;
+    color: white;
+    font-size: 2em;
+}
+
+.box2{
+    
+    height: 30vh; 
+    width: 70vw;
+    align-self: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    color: white;
+    font-size: 2em;
+}
+
+.box3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    height: 12vh;
+    color: white;
+    font-size: 2em;
+}

@@ -1,0 +1,11 @@
+.box {
+    width:100px;
+    height:100px;
+    display: inline-block;
+}
+
+.first{background-color: blue;}
+
+.second{background-color: white;}
+
+.third{background-color: red;}

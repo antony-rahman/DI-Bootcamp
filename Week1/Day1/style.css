@@ -1,0 +1,42 @@
+/* title */
+/* experiment */
+/* selection by tag */
+h1{
+    background-color: red;
+}
+
+header{
+    border: 2px solid black;}
+header p{
+    color: blue;
+}
+/* style the direct children of the header */
+header > p{
+    color: red;
+}
+
+header,div {
+    border : 3px solid red
+}
+
+h1+h2{
+    color: green;
+    font-size: 25px;
+}
+
+#id
+
+.title {
+    color: green;
+}
+
+.firsttitle {
+    color: bisque;
+}
+
+#ocean {color: blue;}
+
+#para {color: purple;}
+p.paragraph1 {background-color: aquamarine;}
+section p{font-size: 40px;}
+

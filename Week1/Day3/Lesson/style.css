@@ -1,0 +1,100 @@
+
+/*GENERAL CSS*/
+
+div {
+    text-align: center;
+    color: black;
+    font-size: 4em;
+    width: 100%;
+    height: auto;
+}
+
+.greenbox {
+    background-color: #A4E6A4;
+}
+
+.purplebox {
+    background-color: #CEAAF0;
+}
+
+.pinkbox{
+    background-color: #F288D5;
+}
+
+.bluebox{
+    background-color: #438EEA;
+}
+
+.yellowbox{
+    background-color: #F4ED79;
+}
+
+.redbox{
+    background-color: #F8394F;
+}
+
+/*-----------------------------*/
+
+/* 1st demonstration: Flexbox */
+/*important properties on the parent container*/
+.sectionflexbox {
+    border: 3px solid black; 
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    /* flex directon means main axis */
+    justify-content: space-evenly; 
+    /* depends on the main axis */
+    align-items: center;
+   /* depends on the cross axis : cross axis here is y */
+   flex-wrap: wrap;
+   gap: 2em 3em;
+   /* row_gap column_gap */
+} 
+
+
+div {
+    width: 100px;
+    height: 100px;
+}
+
+.pink_f{
+    
+}
+
+
+
+
+
+/* 1st demonstration: Flexbox */
+/* .sectionflexbox {
+    border: 3px solid black; 
+    height: 300px;
+    max-width: 800px;
+    important properties on the parent container
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}  */
+
+.green_f {
+    /* align-self: stretch;
+    flex-grow: 1; 
+    flex-basis: 100px;  
+    order:6  */
+}
+
+.purple_f {
+    /* flex-grow: 1;  
+    order:4;  */
+}
+
+.pink_f{
+    /* flex-grow: 1;
+    width: 50px;
+    height : 50px;
+    align-self: flex-end;  */
+    /* align-self: flex-end; */
+}

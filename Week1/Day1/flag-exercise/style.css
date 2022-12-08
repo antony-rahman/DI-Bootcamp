@@ -1,0 +1,18 @@
+#para{
+    font-size: 30px;
+    background: aliceblue;
+    border: 2px solid blue;
+}
+
+section p {
+    border: 2px solid black;
+}
+
+section > p {
+    border: 2px solid black;
+}
+
+h1 + p {
+    color : red;
+    background-color: yellow;
+}
