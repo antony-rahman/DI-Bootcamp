@@ -1,0 +1,26 @@
+What is a class?
+a prototype from which objects are created
+
+What is an instance?
+the object created with a class
+
+What is encapsulation?
+is the packing of data(arguments) and methods. A class is an encapsulation
+because it bundles data and methods that are "hiden" from outside the class
+
+What is abstraction?
+is the process of handling with complexity and hiding unnecessary information from the user.
+@property is an example of abstraction?
+
+What is inheritance?
+is the process of an secundary Class receiving attributes and methods from it`s primary Class
+
+What is multiple inheritance?
+It`s when a child Class receives inheritance from multiples parent Classes
+
+What is polymorphism?
+is changing some method in a child Class that it received from inheritance and mantaining the same name as in the parent Class 
+
+What is method resolution order or MRO?
+The Method Resolution Order (MRO) is the set of rules that construct the linearization.
+linearization is The list of the ancestors of a class C, including the class itself, ordered from the nearest ancestor to the furthest.

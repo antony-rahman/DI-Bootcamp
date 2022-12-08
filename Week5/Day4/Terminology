@@ -1,0 +1,9 @@
+I/O = Input/output
+API = 
+
+Jason = to get the data with an API as an dictionary
+The dump() method is used when the Python objects have to be stored in a file.	
+The dumps() is used when the objects are required to be in string format and is used for parsing, printing, etc, .
+syntax:
+with open("myfile.json", "w") as out_file:  
+json.dump(dict1, out_file)
