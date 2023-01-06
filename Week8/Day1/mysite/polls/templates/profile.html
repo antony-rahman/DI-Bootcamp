@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'styles.css'%">
+    <title>Django Learning</title>
+</head>
+<body>
+    {% if gender == 'F' %} 
+    <h1>Hello Mrs {{first_name}} {{last_name}}</h1>
+    {% if gender == 'M' %} 
+    <h1>Hello Mr {{first_name}} {{last_name}}</h1>
+    {% endif %} 
+    <h1>Hello {{first_name}} {{last_name}}</h1>
+    <h2>Welcome to my website</h2> 
+    <h4>Today we are going to talk about</h4> 
+
+</body>

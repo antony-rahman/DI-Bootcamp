@@ -1,0 +1,10 @@
+{% if latest_workout_list %}
+    <ul>
+        <h3>Workout List</h3>
+    {% for workout in latest_workout_list %}
+        <li>{{ workout.duration }} of {{ workout.type }} on {{ workout.date }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No workouts have been recorded.</p>
+{% endif %}

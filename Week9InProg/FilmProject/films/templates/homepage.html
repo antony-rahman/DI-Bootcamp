@@ -1,0 +1,31 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+         <script> alert('{{message}}') </script>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {%for film in films%}
+    <div>
+        <br>
+        Title: {{film.title}}
+        <br>
+        Genre:
+        {% for cat in film.categories.all%}
+            {{cat}} |
+        {% endfor %}
+        <br>
+        Director:
+        {% for dir in film.directors.all%}
+            {{dir}}
+        {%endfor%}
+        <br>
+
+    </div>
+    {%endfor%}
+{% endblock content%}

@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+    {{director}} 
+    <br>
+    
+    <a href="{%url 'update_director' director.id%}"> Update details</a>
+    {%for film in films%}
+    <div>
+        <br>
+        Title: {{film.title}}
+        <br>
+        Genre:
+        {% for cat in film.categories.all%}
+            {{cat}} |
+        {% endfor %}
+        <br>
+        Released at: {{film.release_date}}
+        <br>
+    </div>
+    
+    {%endfor%}
+
+{% endblock content%}

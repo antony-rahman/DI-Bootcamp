@@ -1,0 +1,40 @@
+[1] Activate VENV
+[2] django-admin startproject <project_name>
+[3] python manage.py startapp <app_name>
+[4] in settings.py, add <app_name> to INSTALLED_APPS 
+[5] in models.py, create models
+    * add __str__ 
+[6] connect to database
+    * in settings.py, specify DATABASES
+    * python manage.py makemigrations
+    * python manage.py migrate
+[7] in views.py, create views
+    * from .models import Model
+    * create views (def ...(requst): ...)
+    * return render(requst, template, dict)
+[OnTheWay] python manage.py shell
+    * from <app_name>.models import Model
+        ...Try stuff before applying in views
+[8] create template
+    * create folder templates
+    * inside templates, create .html file
+[9] connect urls
+    * create urls.py in <app_name> folder
+    * connect <project_name>.urls.py to <app_name>.urls.py
+    Example for <app_name>.urls.py
+    ------------------------------
+    from django.urls import path
+    from .views import (get_by_name)
+    urlpatterns = [
+        path("info/<str:name>",get_by_name,name='get_by_name'),
+    ]
+    Example for <project_name>.urls.py
+    ----------------------------------
+    from django.contrib import admin
+    from django.urls import path, include
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path("", include('oneonefour.urls'))
+    ]
+[10] python manage.py runserver
+

@@ -1,0 +1,12 @@
+{% extends 'partials/base.html' %}
+
+{%block content%}
+
+<div>
+    {% for director in directors%}
+    <a href="{{director.get_absolute_url}}">
+    <h2>{{director}}</h2>
+    </a>
+    {% endfor%}
+    {% end block content%}
+</div>
