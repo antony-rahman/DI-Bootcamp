@@ -1,10 +1,53 @@
-{% if latest_workout_list %}
-    <ul>
-        <h3>Workout List</h3>
-    {% for workout in latest_workout_list %}
-        <li>{{ workout.duration }} of {{ workout.type }} on {{ workout.date }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No workouts have been recorded.</p>
+{% extends "base.html" %}
+{% block content %}
+
+{% if messages %}
+<div class="flex items-center justify-center">
+    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" style="width: 500px; padding: 10px; margin: 10px;" role="alert">
+        <div class="flex">
+          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+          {% for message in messages %}
+          <div>
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
 {% endif %}
+
+<section class="flex items-center justify-center">
+    <div class="flex prose lg:prose">
+    <h2 class="font-extrabold"> Workout level: {{ workout_level }} </h2>
+    </div>
+</section>
+
+<div class="block w-full text-center mx-auto" style="text-align: center;">
+    {% if latest_workout_list %}
+    <div class="float-left prose prose:lg inline-block p-6" style="width: 500px; vertical-align: top; text-align: left;">
+        <h3>Workout List</h3>
+        <ul class="list-none">
+        
+        {% for workout in latest_workout_list %}
+            <li>{{ workout.duration }} {{ workout.get_uom }} of {{ workout.type }} on {{ workout.date }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+        <p>No workouts have been recorded.</p>
+    {% endif %}
+
+    <div class="float-right prose prose:lg inline-block p-6" style="width: 500px; vertical-align: top; text-align: left;">
+        <h3>Log a workout</h3>
+        <form action="{% url 'workouts:log_workout' %}"
+            method="post">
+            {% csrf_token %}
+            <div class="input-group input-group-outline">
+            {{ form.as_p }}
+            </div>
+        <button class="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r" type="submit">Log workout</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

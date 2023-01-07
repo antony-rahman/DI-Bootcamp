@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 from django.db import models
+from django.db.models import Sum
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -24,7 +25,7 @@ class Workout(models.Model):
     )
 
     duration = models.IntegerField(
-        default=0, help_text='Enter workout duration (minutes)'
+        default=0, help_text='(minutes or repos depending on workout type)'
     )
 
     date = models.DateField(
@@ -43,3 +44,21 @@ class Workout(models.Model):
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
         return "Workout %d of type %s" %(self.id, self.type)
+
+    def get_uom(self):
+        uom = {
+            'JOGGING' : 'minutes',
+            'SWIMMING': 'minutes',
+            'BIKING': 'minutes',
+            'YOGA': 'minutes', 
+            'PUSHUPS': 'reps',
+            'SITUPS': 'reps'
+        }
+        return uom.get(self.type)
+
+    @classmethod
+    def get_level(cls):
+        workouts_total = Workout.objects.aggregate(Sum('duration'))
+        
+        ## Level will start at 1 and increase by 1 for every 100 reps/minutes
+        return (round(workouts_total['duration__sum']/100) + 1)
