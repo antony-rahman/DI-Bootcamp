@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib import auth
 from django.urls import path
 from django.urls import include
+from workouts import views
 
 urlpatterns = [
     path('workouts/', include('workouts.urls')),
@@ -23,6 +25,9 @@ urlpatterns = [
 
 urlpatterns += [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', views.log_out, name='log_out'),
+    path('register/', views.register, name = 'register'),  
 ]
 
 from django.views.generic import RedirectView

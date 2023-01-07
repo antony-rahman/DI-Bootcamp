@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<div class="flex items-center justify-center">
+    <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" style="width: 500px; padding: 10px; margin: 10px;" role="alert">
+        <div class="flex">
+          <div class="py-1"><svg xmlns="http://www.w3.org/2000/svg" clip-rule="evenodd" fill-rule="evenodd" height="16" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 2.53988 2.53988" width="16" class="fill-current h-5 w-6 text-red-500 mr-4"><g id="图层_x0020_1"><circle fill="#ff1f1f" r="2.17" transform="matrix(.414 -.414 .414 .414 1.27 1.27)"/><g fill="#fff"><path d="m1.16935 1.61.44065-.44065.34759-.3476c.06586-.06586.06586-.1736 0-.23946-.06586-.06586-.1736-.06586-.23946 0l-.3476.34759-.44065.44065-.34759.3476c-.06586.06586-.06586.1736 0 .23946.06586.06586.1736.06586.23946 0z"/><path d="m1.61 1.37053-.44065-.44065-.3476-.34759c-.06586-.06586-.1736-.06586-.23946 0-.06586.06586-.06586.1736 0 .23946l.34759.3476.44065.44065.3476.34759c.06586.06586.1736.06586.23946 0 .06586-.06586.06586-.1736 0-.23946z"/></g></g></svg></div>
+            <p>Your username and password didn't match. Please try again.</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+{% if messages %}
+<div class="flex items-center justify-center">
+    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" style="width: 500px; padding: 10px; margin: 10px;" role="alert">
+        <div class="flex">
+          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+          {% for message in messages %}
+          <div>
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
+{% endif %}
+
+
+<section class="flex items-center justify-center">
+
+<div class="float-right prose prose:lg inline-block p-6" style="width: 500px; vertical-align: top; text-align: left;">
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="Login" class="float-right bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r">
+<input type="hidden" name="next" value="{{ next }}">
+</form>
+
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<p><a href="{% url 'register' %}">Create an account</a></p>
+
+</div>
+</section>
+{% endblock %}
