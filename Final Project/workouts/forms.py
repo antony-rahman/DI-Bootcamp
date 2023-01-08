@@ -5,6 +5,7 @@ class WorkoutForm(ModelForm):
     class Meta:
         model = Workout
         fields = ['type', 'duration', 'date']
+        exclude = ["user"]
     
     def __init__(self, *args, **kwargs):
         super(WorkoutForm, self).__init__(*args, **kwargs)

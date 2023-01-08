@@ -7,6 +7,8 @@ from django.db.models import Sum
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+from django.contrib.auth.models import User
 
 class Workout(models.Model):
     """The base Workout model class."""
@@ -25,12 +27,16 @@ class Workout(models.Model):
     )
 
     duration = models.IntegerField(
-        default=0, help_text='(minutes or repos depending on workout type)'
+        default=0, help_text='(minutes or reps depending on workout type)'
     )
 
     date = models.DateField(
         default=timezone.now
     )
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE,
+                             default=1)
 
     # Metadata
     class Meta:
@@ -57,8 +63,10 @@ class Workout(models.Model):
         return uom.get(self.type)
 
     @classmethod
-    def get_level(cls):
-        workouts_total = Workout.objects.aggregate(Sum('duration'))
-        
-        ## Level will start at 1 and increase by 1 for every 100 reps/minutes
-        return (round(workouts_total['duration__sum']/100) + 1)
+    def get_level(cls, user):
+        workouts_total = Workout.objects.filter(user=user).aggregate(Sum('duration'))
+        if workouts_total['duration__sum'] is None:
+            return 1
+        else:
+            ## Level will start at 1 and increase by 1 for every 100 reps/minutes
+            return (round(workouts_total['duration__sum']/100) + 1)

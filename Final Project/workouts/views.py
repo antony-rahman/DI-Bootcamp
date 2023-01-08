@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 from django.http import HttpResponse
@@ -13,8 +14,8 @@ from .forms import WorkoutForm
 
 @login_required
 def index(request):
-    latest_workout_list = Workout.objects.order_by('-date')
-    workout_level = Workout.get_level()
+    latest_workout_list = Workout.objects.order_by('-date').filter(user=request.user)
+    workout_level = Workout.get_level(request.user)
     form = WorkoutForm()
     context = {
         'latest_workout_list': latest_workout_list,
@@ -28,8 +29,11 @@ def index(request):
 def log_workout(request):
     if request.method == 'POST':
         form = WorkoutForm(request.POST)
+        print(request.user)
         if form.is_valid():
-            form.save()
+            workout = form.save(commit=False)
+            workout.user = User.objects.get(username=request.user)
+            workout.save()
             messages.success(request, 'Workout logged successfully')
             return redirect('/workouts/')
     else:
@@ -41,7 +45,6 @@ def log_workout(request):
                   })
 
 def register(request):
-    print('here')
     if request.method == 'POST':  
         form = UserCreationForm(request.POST)
         if form.is_valid():
